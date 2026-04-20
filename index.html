@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>STEVENSYSTEM | Premium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <style>
+        :root {
+            --primary-glow: #00f2fe;
+            --accent: #00ff88;
+            --bg-dark: #0f0f0f;
+            --card-bg: rgba(255, 255, 255, 0.07);
+            --yape: #742d8a;
+        }
+
+        * { box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container { width: 100%; max-width: 450px; text-align: center; padding: 30px 20px; }
+
+        .orbit {
+            width: 60px; height: 60px;
+            border: 3px solid transparent; border-top-color: var(--primary-glow);
+            border-radius: 50%; margin: 0 auto 20px;
+            animation: spin 1s linear infinite;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        h1 { font-family: 'Montserrat'; font-size: 2.2rem; margin: 0; letter-spacing: 2px; color: var(--primary-glow); text-shadow: 0 0 10px rgba(0, 242, 254, 0.5); }
+        .sub-text { color: #888; font-size: 0.9rem; margin: 10px 0 30px; }
+
+        .btn {
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            width: 100%; padding: 20px; margin: 10px 0; border-radius: 18px;
+            font-weight: 600; text-decoration: none; border: none; cursor: pointer; font-size: 1.1rem;
+            transition: 0.3s;
+        }
+        .btn:active { transform: scale(0.95); }
+
+        .btn-ws { background: rgba(37, 211, 102, 0.1); border: 1px solid #25d366; color: #25d366; }
+        .btn-buy-main { background: linear-gradient(45deg, #00f2fe, #4facfe); color: #000; box-shadow: 0 10px 20px rgba(0, 242, 254, 0.2); }
+        
+        .btn-view { background: rgba(255, 255, 255, 0.1); color: #fff; width: 100%; padding: 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.2); margin-top: 5px; font-size: 0.9rem; }
+
+        .full-modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; z-index: 9999; overflow-y: auto; padding: 20px;
+        }
+
+        .card {
+            background: var(--card-bg); border-radius: 25px; padding: 20px;
+            margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .qr-box { background: #fff; padding: 15px; border-radius: 20px; width: 230px; margin: 20px auto; border: 4px solid var(--yape); }
+        .qr-box img { width: 100%; display: block; }
+        
+        #timer { font-size: 2.2rem; font-weight: bold; color: #ff4444; margin: 15px 0; text-shadow: 0 0 10px rgba(255, 68, 68, 0.3); }
+
+        .progress-box { width: 100%; height: 14px; background: #222; border-radius: 10px; margin: 25px 0; overflow: hidden; border: 1px solid #333; }
+        .bar { width: 0%; height: 100%; background: var(--accent); transition: 0.4s; box-shadow: 0 0 10px var(--accent); }
+
+        #percentText { font-size: 2.8rem; font-weight: bold; color: var(--accent); display: block; }
+
+        .warning { 
+            background: rgba(255, 68, 68, 0.1); color: #ffbbbb; padding: 18px; 
+            border-radius: 15px; font-size: 0.95rem; border: 1px solid rgba(255, 68, 68, 0.4); 
+            margin: 20px 0; line-height: 1.4;
+        }
+
+        .close-x { position: fixed; top: 20px; right: 20px; font-size: 2.5rem; color: #fff; z-index: 10000; }
+
+        #imgViewer { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 10001; justify-content: center; align-items: center; }
+        #imgViewer img { max-width: 90%; max-height: 80%; border-radius: 15px; }
+
+        .file-upload { background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; border: 2px dashed #444; width: 100%; color: #fff; }
+    </style>
+</head>
+<body>
+
+<div class="container animate__animated animate__fadeInDown">
+    <div class="orbit"></div>
+    <h1 class="animate__animated animate__zoomIn animate__delay-1s">STEVENSYSTEM</h1>
+    <p class="sub-text animate__animated animate__fadeIn animate__delay-1s">Haz clic en comprar bancos fake si te interesa revender.</p>
+
+    <a href="https://wa.me/51992867258" class="btn btn-ws animate__animated animate__fadeInLeft animate__delay-1s"><i class="fab fa-whatsapp"></i> Soporte WhatsApp</a>
+    <button class="btn btn-buy-main animate__animated animate__fadeInRight animate__delay-1s" onclick="showModal('modalStore')"><i class="fas fa-shopping-cart"></i> COMPRAR BANCOS FAKE</button>
+</div>
+
+<div id="modalStore" class="full-modal animate__animated animate__fadeIn">
+    <div class="close-x" onclick="hideModal('modalStore')">&times;</div>
+    <div style="text-align: center; padding-top: 40px;">
+        <h2 class="animate__animated animate__lightSpeedInLeft">CATÁLOGO APKS</h2>
+        <div class="card animate__animated animate__zoomIn">
+            <i class="fas fa-qrcode" style="color: var(--yape); font-size: 2.5rem; margin-bottom: 10px;"></i>
+            <h3>YAPE FAKE</h3>
+            <div style="font-size: 1.8rem; font-weight: 700; color: var(--accent);">S/ 15.00</div>
+            <button class="btn-view" onclick="viewPhoto('yape.jpeg')">Ver Resultado</button>
+            <button class="btn" style="background: var(--accent); color:#000;" onclick="startPay('YAPE FAKE', '15.00')">Comprar Ahora</button>
+        </div>
+        <div class="card animate__animated animate__zoomIn animate__delay-1s">
+            <i class="fas fa-university" style="color: #fbba00; font-size: 2.5rem; margin-bottom: 10px;"></i>
+            <h3>BCP FAKE</h3>
+            <div style="font-size: 1.8rem; font-weight: 700; color: var(--accent);">S/ 15.00</div>
+            <button class="btn-view" onclick="viewPhoto('bcp.jpeg')">Ver Resultado</button>
+            <button class="btn" style="background: var(--accent); color:#000;" onclick="startPay('BCP FAKE', '15.00')">Comprar Ahora</button>
+        </div>
+        <div class="card animate__animated animate__zoomIn animate__delay-2s" style="border: 1px solid var(--accent);">
+            <i class="fas fa-bolt" style="color: #ff4500; font-size: 2.5rem; margin-bottom: 10px;"></i>
+            <h3>COMBO (YAPE + BCP)</h3>
+            <div style="font-size: 1.8rem; font-weight: 700; color: var(--accent);">S/ 23.00</div>
+            <button class="btn-view" onclick="viewPhoto('combo.jpeg')">Ver Resultado</button>
+            <button class="btn" style="background: var(--accent); color:#000;" onclick="startPay('COMBO APKS', '23.00')">Comprar Combo</button>
+        </div>
+    </div>
+</div>
+
+<div id="modalPay" class="full-modal animate__animated animate__fadeIn">
+    <div style="text-align: center; padding-top: 20px;">
+        <h2 style="color: var(--primary-glow);">PAGO SEGURO</h2>
+        <div id="timer">10:00</div>
+        <div class="qr-box animate__animated animate__zoomIn"><img src="qr_yape.jpeg"></div>
+        <p>Monto a transferir: <b id="pPriceDisplay" style="color: var(--accent); font-size: 1.6rem;"></b></p>
+        <div style="margin: 20px 0;" class="animate__animated animate__fadeInUp">
+            <p style="margin-bottom: 10px;">Adjunta captura del Yapeo:</p>
+            <input type="file" id="fileInp" class="file-upload" accept="image/*">
+        </div>
+        <button class="btn btn-buy-main" onclick="validate()">YA HE YAPEADO</button>
+        <button onclick="location.reload()" style="background:none; border:none; color:#555; margin-top:10px;">Cancelar Pedido</button>
+    </div>
+</div>
+
+<div id="modalVal" class="full-modal">
+    <div style="text-align: center; padding-top: 80px;">
+        <div class="orbit"></div>
+        <span id="percentText" class="animate__animated animate__pulse animate__infinite">0%</span>
+        <h2 id="valStatus" style="font-size: 1.2rem; min-height: 70px; color: #fff; padding: 0 15px; line-height: 1.5;">Iniciando Seguridad...</h2>
+        <div class="warning animate__animated animate__pulse animate__infinite">
+            ⚠️ <b>¡ATENCIÓN!</b><br>
+            No cierres ni salgas de la pantalla esta validación puede demorar de 2 a 5 minutos.
+        </div>
+        <div class="progress-box"><div class="bar" id="progressBar"></div></div>
+    </div>
+</div>
+
+<div id="imgViewer">
+    <div class="close-x" onclick="closePhoto()">&times;</div>
+    <img id="fullImg" src="">
+</div>
+
+<script>
+    let timeLeft = 600;
+    let timer;
+    let currentProduct = "";
+    let currentPrice = "";
+    let orderID = "STV-" + Math.floor(Math.random()*999999);
+
+    function showModal(id) { document.getElementById(id).style.display = 'block'; }
+    function hideModal(id) { document.getElementById(id).style.display = 'none'; }
+
+    function viewPhoto(src) {
+        document.getElementById('fullImg').src = src;
+        document.getElementById('imgViewer').style.display = 'flex';
+    }
+    function closePhoto() { document.getElementById('imgViewer').style.display = 'none'; }
+
+    function startPay(name, price) {
+        currentProduct = name;
+        currentPrice = price;
+        hideModal('modalStore');
+        document.getElementById('pPriceDisplay').innerText = 'S/ ' + price;
+        showModal('modalPay');
+        timer = setInterval(() => {
+            let m = Math.floor(timeLeft / 60);
+            let s = timeLeft % 60;
+            document.getElementById('timer').innerText = `${m}:${s < 10 ? '0' : ''}${s}`;
+            if (timeLeft <= 0) { clearInterval(timer); location.reload(); }
+            timeLeft--;
+        }, 1000);
+    }
+
+    function validate() {
+        if (document.getElementById('fileInp').files.length === 0) {
+            alert("❌ OBLIGATORIO: Debes subir la captura de pago.");
+            return;
+        }
+        hideModal('modalPay');
+        showModal('modalVal');
+        let p = 0;
+        let bar = document.getElementById('progressBar');
+        let status = document.getElementById('valStatus');
+        let pText = document.getElementById('percentText');
+        const steps = [
+            { limit: 20, msg: "Analizando metadatos..." },
+            { limit: 40, msg: "Validando código de operación..." },
+            { limit: 60, msg: "Sincronizando con servidores..." },
+            { limit: 80, msg: "Verificando fondos..." },
+            { limit: 100, msg: "Cruzando datos finales..." }
+        ];
+        let stepInterval = setInterval(() => {
+            p++;
+            bar.style.width = p + "%";
+            pText.innerText = p + "%";
+            for (let i = 0; i < steps.length; i++) {
+                if (p <= steps[i].limit) {
+                    status.innerHTML = `<span style="color:var(--primary-glow); font-weight:bold;">VALIDANDO... ${p}%</span><br>${steps[i].msg}`;
+                    break;
+                }
+            }
+            if(p >= 100) {
+                clearInterval(stepInterval);
+                setTimeout(showFake, 1000);
+            }
+        }, 900);
+    }
+
+    function showFake() {
+        const wspMsg = encodeURIComponent(`Hola soporte e realizado el pago para comprar ${currentProduct}, el precio fue de s/ ${currentPrice} y me salió que es falso quisiera que revisen mi caso con número de orden : ${orderID} y aquí abajo estoy enviando la captura de la transferencia`);
+        document.getElementById('modalVal').innerHTML = `
+            <div style="text-align: center; padding: 50px 20px;" class="animate__animated animate__headShake">
+                <i class="fas fa-times-circle" style="font-size: 6rem; color: #ff4444; margin-bottom:20px;"></i>
+                <h1 style="color: #ff4444;">TRANSFERENCIA FALSA</h1>
+                <p style="font-size: 1.1rem; margin: 25px 0; color: #ccc;">No seas hábil, tenemos el mejor sistema y sabemos cuándo has pagado y cuándo no.</p>
+                <a href="https://wa.me/51992867258?text=${wspMsg}" class="btn btn-ws animate__animated animate__pulse animate__infinite"><i class="fab fa-whatsapp"></i> HABLAR CON SOPORTE</a>
+                <p style="margin-top:20px; font-size:0.8rem; color:#555;">ID ORDEN: ${orderID}</p>
+            </div>
+        `;
+    }
+</script>
+</body>
+</html>
